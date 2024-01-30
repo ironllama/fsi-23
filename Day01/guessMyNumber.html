@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1. Generate a random number between MIN and MAX
+        const MIN = 1;
+        const MAX = 100;
+        const answer = Math.ceil(Math.random() * MAX);
+
+        // Loop:
+        while (true) {
+            // 2. PROMPT the user to guess the number between MIN and MAX
+            // prompt("Guess a number between " + MIN + " and " + MAX);
+            let guess = prompt(`Guess a number between ${MIN} and ${MAX}`);
+            break;
+
+            // 3. IF user guess is too low
+            //     a. ALERT the user that their guess is too low
+            //     b. UPDATE the MIN value
+            //     c. GO BACK to STEP 2
+
+            // 4. IF user guess is too high
+            //     a. ALERT the user that their guess is too high
+            //     b. UPDATE the MAX value
+            //     c. GO BACK to STEP 2
+
+            // 5. IF user guess is perfect!
+            //     a. ALERT a win message.
+            //     b. BREAK out of the loop.
+
+            // 6. IF user guess is invalid
+            //     a. ALERT a goodbye message.
+            //     b. BREAK out of the loop.
+        }
+    </script>
+</body>
+
+</html>

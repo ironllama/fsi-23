@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrays2</title>
+</head>
+
+<body>
+    <script>
+        // Here are the temperatures for each day in May, in degrees Fahrenheit.
+        const mayTemps = [
+            [86, 78, 85, 79, 86, 78, 80],
+            [84, 82, 74, 85, 83, 82, 79],
+            [76, 79, 80, 81, 82, 81, 78],
+            [77, 79, 83, 84, 85, 80, 78],
+            [83, 81, 78]
+        ];
+
+        // 1. Create a function that returns the temperature for a given day (1-31)
+        function getTempForDay(inDay) {
+            let finalTemp = 0;
+
+            if (inDay >= 1 && inDay <= 31) {  // Only process valid days.
+                // Mathy way.
+                //     inDay -= 1;
+                //     const weekNum = Math.floor(inDay / 7);
+                //     const dayNum = inDay % 7;
+                //     finalTemp = mayTemps[weekNum][dayNum];
+
+                // Count days way.
+                let currDay = 1;
+                weekLoop: for (let weekNum = 0; weekNum < 5; weekNum++) {
+                    for (let dayNum = 0; dayNum < 7; dayNum++) {
+                        if (currDay === inDay) {
+                            finalTemp = mayTemps[weekNum][dayNum];
+                            break weekLoop;
+                        }
+                        currDay += 1;
+                    }
+                }
+            }
+
+            return finalTemp;
+        }
+        console.log(86, getTempForDay(1));
+        console.log(79, getTempForDay(4));
+        console.log(80, getTempForDay(7));
+        console.log(74, getTempForDay(10));
+        console.log(80, getTempForDay(17));
+        console.log(84, getTempForDay(25));
+        console.log(78, getTempForDay(31));
+        console.log(0, getTempForDay(32));
+
+        // 2. Create a function that returns an array that contains the lowest temp, highest temp, and average temp for the month. (eg. [54, 66, 58])
+
+        // 3. Create a function that returns the average temperature for a given week (1-5).
+
+        // 4. Create a function that returns the average temperature for a given day of the week ("Su", "M", "T", "W", "Th", "F", "S").
+
+        // 5. Create a function that returns a new data set with the temperatures converted to Celsius.
+    </script>
+</body>
+
+</html>
