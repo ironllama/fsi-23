@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arrays2</title>
+    <title>May Temps</title>
 </head>
 
 <body>
@@ -23,27 +23,54 @@
             let finalTemp = 0;
 
             if (inDay >= 1 && inDay <= 31) {  // Only process valid days.
-                // Mathy way.
-                //     inDay -= 1;
-                //     const weekNum = Math.floor(inDay / 7);
-                //     const dayNum = inDay % 7;
-                //     finalTemp = mayTemps[weekNum][dayNum];
 
-                // Count days way.
-                let currDay = 1;
-                weekLoop: for (let weekNum = 0; weekNum < 5; weekNum++) {
-                    for (let dayNum = 0; dayNum < 7; dayNum++) {
-                        if (currDay === inDay) {
-                            finalTemp = mayTemps[weekNum][dayNum];
-                            break weekLoop;
-                        }
-                        currDay += 1;
-                    }
+                // =============== In-class way =============== 
+                if (inDay >= 1 && inDay <= 7) {
+                    finalTemp = mayTemps[0][inDay - 1];
                 }
+                else if (inDay >= 8 && inDay <= 14) {
+                    finalTemp = mayTemps[1][inDay - 8];
+                }
+                else if (inDay >= 15 && inDay <= 21) {
+                    finalTemp = mayTemps[2][inDay - 15];
+                }
+                else if (inDay >= 22 && inDay <= 28) {
+                    finalTemp = mayTemps[3][inDay - 22];
+                }
+                else if (inDay >= 29 && inDay <= 31) {
+                    finalTemp = mayTemps[4][inDay - 29];
+                }
+
+
+                // // =============== Condensed in-class way ===============
+                // const week = Math.floor((inDay - 1) / 7);  // 0 thru 6 = 0, 7 thru 13 = 1, 14 thru 20 = 2, etc.
+                // const offset = (week * 7) + 1;
+                // finalTemp = mayTemps[week][inDay - offset];
+
+
+                // // =============== Mathy way ===============
+                // inDay -= 1;
+                // const weekNum = Math.floor(inDay / 7);
+                // const dayNum = inDay % 7;
+                // finalTemp = mayTemps[weekNum][dayNum];
+
+
+                // // =============== Count days way =============== 
+                // let currDay = 1;
+                // weekLoop: for (let weekNum = 0; weekNum < 5; weekNum++) {
+                //     for (let dayNum = 0; dayNum < 7; dayNum++) {
+                //         if (currDay === inDay) {
+                //             finalTemp = mayTemps[weekNum][dayNum];
+                //             break weekLoop;
+                //         }
+                //         currDay += 1;
+                //     }
+                // }
             }
 
             return finalTemp;
         }
+        console.log("1. Get temp for day");
         console.log(86, getTempForDay(1));
         console.log(79, getTempForDay(4));
         console.log(80, getTempForDay(7));
@@ -53,13 +80,187 @@
         console.log(78, getTempForDay(31));
         console.log(0, getTempForDay(32));
 
+
         // 2. Create a function that returns an array that contains the lowest temp, highest temp, and average temp for the month. (eg. [54, 66, 58])
+        function getLowHighAvg() {
+            let returnArray = [];
+
+            // Standard way
+            // Stuff we need to track to get our answers.
+            let highTemp = 0;
+            let lowTemp = 1000;
+            let tempTotal = 0;
+            let numDays = 0;
+
+            for (let i = 0; i < mayTemps.length; i++) {
+                for (let k = 0; k < mayTemps[i].length; k++) {
+                    const currTemp = mayTemps[i][k];
+
+                    // if (currTemp > highTemp) {  // Check if this new currTemp is the highest so far.
+                    //     highTemp = currTemp;
+                    // }
+                    highTemp = Math.max(highTemp, currTemp);  // Same as above.
+
+                    // if (currTemp < lowTemp) {  // Check if this new currTemp is the lowest so far.
+                    //     lowTemp = currTemp;
+                    // }
+                    lowTemp = Math.min(lowTemp, currTemp);  // Same as above.
+
+                    tempTotal = tempTotal + currTemp;  // Add to the total for average, later.
+
+                    numDays++;  // Add to the count for average, later.
+                }
+            }
+
+            const avgTemp = Math.round(tempTotal / numDays);
+
+
+            // // =============== Array functions way ===============
+            // const flatArray = mayTemps.flat();
+            // const highTemp = Math.max(...flatArray);  // Using a spread operator to convert arrays to parameters for function.
+            // const lowTemp = Math.min(...flatArray);
+            // const avgTemp = flatArray.reduce((acc, val) => acc + val, 0) / flatArray.length;
+            // avgTemp = Math.round(avgTemp);
+
+
+            return [highTemp, lowTemp, avgTemp];
+        }
+        console.log("2. Get avg for month");
+        console.log("[86, 74, 81]", getLowHighAvg());
+
 
         // 3. Create a function that returns the average temperature for a given week (1-5).
+        function avgForWeek(weekNum) {
+            let weekAvg = 0;
+
+            if (weekNum >= 1 && weekNum <= 5) {
+
+                const week = mayTemps[weekNum - 1];  // Subtract 1: we are given a 1-based number , but arrays are 0-based.
+
+                // =============== Standard way ===============
+                let tempTotal = 0;
+                let numDays = 0;
+                for (const tempDay of week) {
+                    tempTotal += tempDay;
+                    numDays += 1;
+                }
+                weekAvg = Math.round(tempTotal / numDays);
+
+
+                // // =============== Array functions way ===============
+                // weekAvg = week.reduce((acc, val) => acc + val, 0) / week.length;
+                // weekAvg = Math.round(weekAvg);
+            }
+
+            return weekAvg;
+        }
+        console.log("3. Get average for a specific week");
+        console.log("82", avgForWeek(1));
+        console.log("81", avgForWeek(2));
+        console.log("80", avgForWeek(3));
+        console.log("81", avgForWeek(4));
+        console.log("81", avgForWeek(5));
+        console.log("0", avgForWeek(6));
+
 
         // 4. Create a function that returns the average temperature for a given day of the week ("Su", "M", "T", "W", "Th", "F", "S").
+        function avgForDayOfWeek(dayStr) {
+            let avgTemp = 0;
+
+            const allDays = ["Su", "M", "T", "W", "Th", "F", "S"];
+            const dayNum = allDays.indexOf(dayStr);
+
+            if (dayNum !== -1) {
+                // =============== Standard way ===============
+                let tempTotal = 0;
+                let numDays = 0;
+
+                for (const currWeek of mayTemps) {
+                    if (dayNum < currWeek.length) {
+                        tempTotal += currWeek[dayNum];
+                        numDays += 1;
+                    }
+                }
+
+                avgTemp = Math.round(tempTotal / numDays);
+
+
+                // // =============== Loop offsets way ===============
+                // const mayTempsFlat = mayTemps.flat();
+                // let tempTotal = 0;
+                // let numDays = 0;
+                // for (let i = dayNum; i < mayTempsFlat.length; i += 7) {
+                //     const currTemp = mayTempsFlat[i];
+                //     tempTotal += currTemp;
+                //     numDays += 1;
+                // }
+                // avgTemp = Math.round(tempTotal / numDays);
+
+
+                // // =============== Array functions way ===============
+                // const newTemps = [];
+                // const mayTempsFlat = mayTemps.flat();
+                // for (let i = dayNum; i < mayTempsFlat.length; i += 7) {
+                //     newTemps.push(mayTempsFlat[i]);
+                // }
+                // avgTemp = newTemps.reduce((acc, val) => acc + val, 0) / newTemps.length;
+                // avgTemp = Math.round(avgTemp);
+            }
+
+            return avgTemp;
+        }
+        console.log("4. Get average for particular all days of week");
+        console.log("81", avgForDayOfWeek("Su"));
+        console.log("80", avgForDayOfWeek("M"));
+        console.log("80", avgForDayOfWeek("T"));
+        console.log("82", avgForDayOfWeek('W'));
+        console.log("84", avgForDayOfWeek('Th'));
+        console.log("80", avgForDayOfWeek('F'));
+        console.log("79", avgForDayOfWeek('S'));
+        console.log("0", avgForDayOfWeek('X'));
+        console.log("0", avgForDayOfWeek(123));
+
 
         // 5. Create a function that returns a new data set with the temperatures converted to Celsius.
+        function celsiusTemps() {
+            let celsiusMonth = [];
+
+            function fahrToCel(fahr) {
+                const cel = (fahr - 32) * (5 / 9);
+                return cel.toFixed(1);
+            }
+
+            // Building upon the new array created (celciumMonth).
+            for (const week of mayTemps) {
+                const newWeek = [];
+
+                for (const tempDay of week) {
+                    const celTemp = fahrToCel(tempDay);
+                    newWeek.push(celTemp);
+                }
+
+                celsiusMonth.push(newWeek);
+            }
+
+
+            // // =============== Changing a copy of mayTemps ===============
+            // celsiusMonth = JSON.parse(JSON.stringify(mayTemps));  // Using JSON serialize/deserialize to create a deep copy.
+            // for (let week = 0; week < celsiusMonth.length; week++) {
+            //     for (let day = 0; day < celsiusMonth[week].length; day++) {
+            //         let currTemp = celsiusMonth[week][day];
+            //         celsiusMonth[week][day] = fahrToCel(currTemp);  // Change the temp in place!
+            //     }
+            // }
+
+            return celsiusMonth;
+        }
+        console.log("5. Celcius temps");
+        console.log(`['30.0', '25.6', '29.4', '26.1', '30.0', '25.6', '26.7']
+['28.9', '27.8', '23.3', '29.4', '28.3', '27.8', '26.1']
+['24.4', '26.1', '26.7', '27.2', '27.8', '27.2', '25.6']
+['25.0', '26.1', '28.3', '28.9', '29.4', '26.7', '25.6']
+['28.3', '27.2', '25.6']`);
+        console.log(celsiusTemps());
     </script>
 </body>
 

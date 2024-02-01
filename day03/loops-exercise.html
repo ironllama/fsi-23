@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loops</title>
+</head>
+
+<body>
+    <script>
+        // 1: Write a while loop that repeats 10 times.
+        let i = 0;
+        while (i < 10) {
+            i += 1;
+            console.log("I:", i);
+        }
+
+
+        // 2: Write a do while loop that repeats 7 times.
+        let k = 0;
+        do {
+            k += 1;
+            console.log("K:", k);
+        } while (k < 7)
+
+
+        // 3: Write a while loop that repeats until the user enters a value via a prompt. In other words, a prompt is displayed each time the loop is executed. If the user enters something(anything!), the loop stops, and an alert displays the value entered in the prompt. If the user clicks Cancel or does not enter any text, the loop continues and displays the prompt again.
+        let userInput3 = "";
+        while (userInput3 === "" || userInput3 === null) {
+            userInput3 = prompt("Please enter a value:");  // The prompt returns a null, if the user clicks Cancel.
+        }
+        alert("You have exited the loop. You typed: " + userInput3);
+
+
+        // 4: Write a for loop that repeats 3 times, asking the user to enter a number each time. Add the number that they enter each time into a total. At the end, alert the predefined range that their final total falls within.
+        // Explanation :
+        //      During 3 loops, display to the user a message and ask them to enter a number between 1 and 10.
+        //      Loop 1 : "Enter a number between 1 and 10:"
+        //      Loops 2 and 3 : "You can add a number between 1 and 10 to this number. Choose a number to add:"
+        //      When the loops ends, display one of the following to the user, depending on their final total:
+        //          "The total was between [1-10]"
+        //          "The total was between [11-20]"
+        //          "The total was between [21-30]"
+        let totalUserInput4 = 0;
+        for (let i = 0; i < 3; i++) {
+            let userInput4 = "";
+            if (i === 0) {
+                userInput4 = prompt("Enter a number between 1 and 10");
+            }
+            else {
+                userInput4 = prompt("You can add a number between 1 and 10 to this number. Choose a number to add:");
+            }
+            userInput4 = parseInt(userInput4);  // Prompt always returns a string.
+
+            totalUserInput4 = totalUserInput4 + userInput4;
+            // console.log("TOTAL:", totalUserInput4);
+        }
+        if (totalUserInput4 <= 10) {
+            alert("The total was between [1-10]");
+        }
+        else if (totalUserInput4 <= 20) {
+            alert("The total was between [11-20]");
+        }
+        else {
+            alert("The total was between [21-30]");
+        }
+
+        // // Same as the multiple if's above.
+        // switch (true) {
+        //     case (totalUserInput4 <= 10):
+        //         alert("The total was between [1-10]");
+        //         break;
+        //     case (totalUserInput4 <= 20):
+        //         alert("The total was between [11-20]");
+        //         break;
+        //     default:
+        //         alert("The total was between [21-30]");
+        // }
+
+
+        // 5: Display all the numbers divisible by 3 AND all the numbers divisible by 5, up to 1000.
+        //      Example: 3, 5, 6, 9, 10, etc…
+        let output5 = "";
+        for (let i = 3; i <= 1000; i++) {
+            if (i % 3 == 0 || i % 5 == 0) {
+                // console.log(i);
+                output5 = output5 + i + ", ";  // + is concatenation here since output5 starts as a string.
+            }
+        }
+        output5 = output5.substring(0, output5.length - 2);
+        console.log("5:[" + output5 + "]");
+
+
+        // 6: Display the total amount of numbers divisible by 3 OR divisible by 5 from 1 to 1000.
+        let output6 = 0;
+        for (let i = 3; i <= 1000; i++) {
+            if (i % 3 == 0 || i % 5 == 0) {
+                // console.log(i);
+                output6 += 1;
+            }
+        }
+        console.log("6:", output6);
+        // console.log("6:", output5.split(", ").length);
+
+
+        // 7: Display all the numbers divisible by BOTH 3 AND 5 up to 1000.
+        // Example: 15, 30, 45, 60, etc…
+        let output7 = [];
+        for (let i = 15; i < 1000; i++) {
+            if (i % 3 == 0 && i % 5 == 0) {
+                // console.log(i);
+                output7.push(i);
+            }
+        }
+        console.log("7:", output7.join(", "));
+
+
+        // BONUS: Display all the prime numbers up to 1000.
+    </script>
+</body>
+
+</html>

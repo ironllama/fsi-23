@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Numbers, as far as the i can see...</title>
+    <style>
+        body {
+            font-style: sans-serif;
+            font-size: 1.33rem;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        function getLotsOfNumbers() {
+            const arrOfNums = [];
+            for (let i = 0; i < 1300; i++) {
+                arrOfNums.push(Math.floor(Math.random() * 100));
+            }
+            return arrOfNums.join(" ");
+        }
+        document.body.innerHTML = getLotsOfNumbers();
+    </script>
+</body>
+
+</html>
