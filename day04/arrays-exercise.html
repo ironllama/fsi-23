@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arrays</title>
+</head>
+
+<body>
+    <script src="letters.js"></script>
+    <script src="people.js"></script>
+    <script type="text/javascript">
+        // 1. Create an array and put these colors in it:
+        // fuchsia, lime, grey, magenta, teal
+
+        // // Add all of them at the same time.
+        let colors = ["fuchsia", "lime", "grey", "magenta", "teal"];
+
+        // // Add each one at the proper index.
+        // let colors = [];
+        // colors[0] = "fuchsia";
+        // colors[1] = "lime";
+        // colors[2] = "grey";
+        // colors[3] = "magenta";
+        // colors[4] = "teal";
+
+        // // Add one to the end of the array.
+        // let colors = [];
+        // colors.push("fuchsia");
+        // colors.push("lime");
+        // colors.push("grey");
+        // colors.push("magenta");
+        // colors.push("teal");
+
+        console.log("1. COLORS:", colors);  // Print out the results.
+
+
+        // 2. Use array functions to remove the 3 last colors and add 2 new colors at the beginning of the array
+
+        // Remove with pop and add with unshift
+        colors.pop();
+        colors.pop();
+        colors.pop();
+        colors.unshift("periwinkle");
+        colors.unshift("mauve");
+
+        // Remove with slice and add with splice
+        // colors = colors.slice(0, colors.length - 3);
+        // colors.splice(0, 0, "periwinkle", "mauve");
+
+        // Remove with splice and add with splice
+        // colors.splice(2);
+        // colors.splice(0, 0, "periwinkle", "mauve");
+
+        // Selectively add and remove into another copy of colors
+        // colors = ["periwinkle", "mauve", colors[0], colors[1]];
+
+        console.log("2. MOD COLORS:", colors);  // Print out the results.
+
+
+        // 3. Reverse this array
+
+        // Use the array function. Changes IN-PLACE.
+        colors.reverse();
+
+        // Using a loop (going backwards) and new array
+        // let revColors = [];
+        // for (let i = (colors.length - 1); i >= 0; i--) {  // Note that you have to start with length - 1!
+        //     revColors.push(colors[i]);
+        // }
+        // colors = revColors;
+
+        // Using a loop to swap first and last, second and second-last, third and third-last, etc. Changes in-place.
+        // for (let i = 0; i < Math.floor(colors.length / 2); i++) {
+        //     let temp = colors[i];
+        //     colors[i] = colors[colors.length - 1 - i];
+        //     colors[colors.length - 1 - i] = temp;
+        // }
+
+        console.log("2. REV COLORS:", colors);  // Print out the results.
+
+
+        // 4. Find all vowels in the lotsOfLetters array provided in the letter.js file and extract them into another array.
+        // See <script> above where letter.js was imported, so that lotsOfLetters is available in here.
+
+        // Using a loop
+        let countVowels = 0;
+        for (const letter of lotsOfLetters) {
+            if (letter === "a"
+                || letter === "e"
+                || letter === "i"
+                || letter === "o"
+                || letter === "u"
+            ) {
+                countVowels += 1;
+            }
+        }
+
+        // // Using a loop and reference array (allVowels)
+        // let allVowels = ["a", "e", "i", "o", "u"];
+
+        // let countVowels = 0;
+        // for (const letter of lotsOfLetters) {
+        //     if (allVowels.indexOf(letter) !== -1) {
+        //         countVowels += 1;
+        //     }
+        // }
+
+        // // Using array functions
+        // let countVowels = lotsOfLetters.filter(letter => allVowels.includes(letter)).length;
+
+        // // Another, using array functions
+        // let countVowels = lotsOfLetters.reduce((total, letter) => total + (allVowels.includes(letter) ? 1 : 0), 0);
+
+        console.log("4. VOWELS:", countVowels);
+
+
+        // 5. Remove every "z" in the lotsOfLetters array
+
+        // Using a loop
+        let noZArr = [];
+        for (const letter of lotsOfLetters) {
+            if (letter !== 'z') {
+                noZArr.push(letter);
+            }
+        }
+
+        // // Using a loop, but changing in-place with splice.
+        // for (let i = lotsOfLetters.length - 1; i >= 0; i--) {
+        //     if (lotsOfLetters[i] === 'z') {
+        //         lotsOfLetters.splice(i, 1);
+        //     }
+        // }
+        // let noZArr = lotsOfLetters;
+
+        // // Using array functions
+        // let noZArr = lotsOfLetters.filter(letter => letter !== 'z');
+
+        // // Sorting and getting rid of the z's at the end.
+        // lotsOfLetters.sort();
+        // let posOfZ = lotsOfLetters.indexOf('z');
+        // noZArr = lotsOfLetters.slice(0, posOfZ);
+
+        console.log("5. NO-Z:", noZArr)
+
+
+        // 6. Display all the data in the given array in the following format:
+        // "Chris" 19
+        // "Georges" 33
+        // ...
+        const kids = [
+            ["Chris", 19],
+            ["Georges", 33],
+            ["Dustin", 29],
+            ["Wendy", 35],
+        ];
+
+        console.log("6. KIDS:");
+
+        // Using a loop
+        for (const kid of kids) {
+            console.log("\"" + kid[0] + "\" " + kid[1]);
+        }
+
+        // Using a for loop with array destructuring
+        // for (const [name, age] of kids) {
+        //     console.log("\"" + name + "\" " + age);
+        // }
+
+        // Using array functions
+        // kids.forEach(kid => console.log(`"${kid[0]}" ${kid[1]}`));
+
+
+        // BONUS:
+        // In the lotsOfPeople array provided in the people.js file:
+        // - Count how many people have a name starting with the letter "E"
+        // - Count how many people are over 50 years old
+        // - Remove the people under 21 from the array
+
+        let startsWithE = 0;
+        let over50 = 0;
+
+        // Reverse through the array, since we're going to remove under 21s from the array in place
+        for (let x = lotsOfPeople.length - 1; x >= 0; x--) {
+            let currPerson = lotsOfPeople[x];
+
+            if (currPerson[0][0] === 'E') startsWithE += 1;  // if (currPerson[0].charAt(0) === 'E')
+
+            if (currPerson[1] > 50) over50 += 1;
+            else if (currPerson[1] < 21) {
+                const deleted = lotsOfPeople.splice(x, 1);
+                // console.log("DELETED:", deleted);
+            }
+        }
+
+        // // Using multiple array functions
+        // startsWithE = lotsOfPeople.reduce((acc, val) => (val[0][0] == "E") ? acc + 1 : acc, 0);
+        // over50 = lotsOfPeople.filter(val => val[1] > 50).length;
+        // // lotsOfPeople = lotsOfPeople.filter(val => val[1] < 21);  // Can't change constant var
+
+        // // // Go forwards, but account for the shortening array.
+        // // for (let i = 0; i < lotsOfPeople.length; i++) {
+        // //     const currPerson = lotsOfPeople[i];
+        // //     if (currPerson[1] < 21) {
+        // //         lotsOfPeople.splice(i, 1);
+        // //         i -= 1;  // Account for the shortening array.
+        // //     }
+        // // }
+
+        // // Or, go backwards so the iterator will not "skip" after a deletion.
+        // for (let i = lotsOfPeople.length - 1; i >= 0; i--) {
+        //     const currPerson = lotsOfPeople[i];
+        //     if (currPerson[1] < 21) {
+        //         lotsOfPeople.splice(i, 1);
+        //     }
+        // }
+
+        console.log("BONUS: Num starts with E:", startsWithE,
+            "Num over 50:", over50,
+            "PEEPS:", lotsOfPeople
+        );
+
+    </script>
+</body>
+
+</html>
