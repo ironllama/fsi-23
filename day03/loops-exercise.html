@@ -117,6 +117,20 @@
 
 
         // BONUS: Display all the prime numbers up to 1000.
+        // Since almost all prime numbers are going to be odd, except for 2, we're going we're going to "seed" our results with that 2 and only test/add odd numbers. 
+        let q8Str = "2, ";
+
+        // The loop only generates odd numbers by starting the iterating variable (possPrime) with 3 and adding 2 to it at the end of every loop.
+        outer:  // Labelled this outer loop, since we'll want to use the continue keyword from here.
+        for (let possPrime = 3; possPrime < 1000; possPrime += 2) {
+            // Test all numbers, but only need to test up to num/2, since there is no whole number between 2 and 1.
+            for (let possDiv = 2; possDiv < Math.ceil(possPrime / 2); possDiv++) {
+                // If not a prime, stop testing the rest of the possDiv and go to next possPrime.
+                if (possPrime % possDiv === 0) continue outer;
+            }
+            q8Str += possPrime + ", ";  // Found a prime! Concat to the results.
+        }
+        console.log("q8:", q8Str);
     </script>
 </body>
 
