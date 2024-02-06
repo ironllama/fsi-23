@@ -78,22 +78,37 @@ console.log("Num vowels: [u, o, o, a, o, i, i, e, u, i, o, e, e]:", getVowels(lo
 // 4. Create a function that takes an array of people and a name and will return back the age of that person.
 // Use the lotsOfPeople array from the provided people.js file.
 const { lotsOfPeople } = require("./people.js");
-function getAgeOfPerson(personName) {
+function getAgeOfPerson(allPeople, personName) {
     let age = 0;
 
-
+    for (let i = 0; i < allPeople.length; i++) {
+        if (personName === allPeople[i][0]) {  // Test for match on name.
+            age = allPeople[i][1];  // Found a match! Get the age.
+            break;  // Stop checking the rest of the names.
+        }
+    }
 
     return age;
 }
-console.log("Age of Boyd: 52:", getAgeOfPerson("Boyd"));
-console.log("Age of Geovanny: 51:", getAgeOfPerson("Geovanny"));
-console.log("Age of Pedro: 26:", getAgeOfPerson("Pedro"));
-console.log("Age of Ezequiel: 57:", getAgeOfPerson("Ezequiel"));
-console.log("Age of Michael: 0:", getAgeOfPerson("Michael"));
+console.log("Age of Boyd: 52:", getAgeOfPerson(lotsOfPeople, "Boyd"));
+console.log("Age of Geovanny: 51:", getAgeOfPerson(lotsOfPeople, "Geovanny"));
+console.log("Age of Pedro: 26:", getAgeOfPerson(lotsOfPeople, "Pedro"));
+console.log("Age of Ezequiel: 57:", getAgeOfPerson(lotsOfPeople, "Ezequiel"));
+console.log("Age of Michael: 0:", getAgeOfPerson(lotsOfPeople, "Michael"));
 
 
 // 5. Create a function that take an array of people, a name, and a age and will add a new person into the lotsOfPeople array.
 // Use the lotsOfPeople array from the provided people.js file.
+
+function addPerson(people, name, age) {
+    // LOGIC HERE
+}
+addPerson(lotsOfPeople, "Nina", 33);
+console.log("Add person: [[\"Ezequiel\", 57], [\"Nina\", 33]]:", lotsOfPeople.slice(-2));
+addPerson(lotsOfPeople, "Eden", 25);
+console.log("Add person: [[\"Ezequiel\", 57], [\"Nina\", 33], [\"Eden\", 25]]:", lotsOfPeople.slice(-3));
+addPerson(lotsOfPeople);
+console.log("Add person: [[\"Ezequiel\", 57], [\"Nina\", 33], [\"Eden\", 25]]:", lotsOfPeople.slice(-3));
 
 
 // 6. Create a function that takes two arguments: an array of numbers and a multiplier.
