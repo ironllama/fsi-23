@@ -101,20 +101,48 @@ console.log("Age of Michael: 0:", getAgeOfPerson(lotsOfPeople, "Michael"));
 // Use the lotsOfPeople array from the provided people.js file.
 
 function addPerson(people, name, age) {
-    // LOGIC HERE
+    // if ((name !== undefined && age !== undefined)
+    // || (name !== null && age !== null)
+    // || (name !== "" && age !== 0)) {
+    if (name && age) {  // Same as above, but with implicit coersion/cast to boolean.
+        // lotsOfPeople.push
+        const newPerson = [name, age];
+        people.push(newPerson);
+    }
 }
 addPerson(lotsOfPeople, "Nina", 33);
 console.log("Add person: [[\"Ezequiel\", 57], [\"Nina\", 33]]:", lotsOfPeople.slice(-2));
 addPerson(lotsOfPeople, "Eden", 25);
 console.log("Add person: [[\"Ezequiel\", 57], [\"Nina\", 33], [\"Eden\", 25]]:", lotsOfPeople.slice(-3));
-addPerson(lotsOfPeople);
+addPerson(lotsOfPeople);  // Left off second argument
 console.log("Add person: [[\"Ezequiel\", 57], [\"Nina\", 33], [\"Eden\", 25]]:", lotsOfPeople.slice(-3));
 
 
 // 6. Create a function that takes two arguments: an array of numbers and a multiplier.
 // The function should update the array with each number multiplied by the multiplier parameter.
 // Ex : [2,5,1,10] with multiplier 2 should update the array to [4,10,2,20]
+function multiplyArrayBy(inArray, inMult) {
+    // LOGIC HERE
+}
+let testArr = [2, 5, 1, 10];
+multiplyArrayBy(testArr, 2);
+console.log("Multiply: [4, 10, 2, 20]:", testArr);
 
+testArr = [1, -2, 0];
+multiplyArrayBy([1, -2, 0], -3)
+console.log("Multiply: [-3, 6, 0]:", testArr);
+
+testArr = [90];
+multiplyArrayBy([90], 10)
+console.log("Multiply: [900]:", testArr);
+
+testArr = [5, -20, 49];
+multiplyArrayBy(testArr);  // Left off second argument
+console.log("Multiply: [5, -20, 49]:", testArr);
+
+testArr = [];
+multiplyArrayBy(testArr, 12);
+console.log("Multiply: []:", testArr);
 
 // 7. Create a function that will sort an array of people so the people are ordered by their age in numerical order.
 // Use the lotsOfPeople array from the provided people.js file.
