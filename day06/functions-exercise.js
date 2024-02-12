@@ -121,19 +121,24 @@ console.log("Add person: [[\"Ezequiel\", 57], [\"Nina\", 33], [\"Eden\", 25]]:",
 // 6. Create a function that takes two arguments: an array of numbers and a multiplier.
 // The function should update the array with each number multiplied by the multiplier parameter.
 // Ex : [2,5,1,10] with multiplier 2 should update the array to [4,10,2,20]
-function multiplyArrayBy(inArray, inMult) {
-    // LOGIC HERE
+function multiplyArrayBy(inArray, inMult = 1) {
+    // if (isNaN(inMult)) return
+
+    for (let i = 0; i < inArray.length; i++) {
+        // if (isNaN(inMult)) continue
+        inArray[i] *= inMult;
+    }
 }
 let testArr = [2, 5, 1, 10];
 multiplyArrayBy(testArr, 2);
 console.log("Multiply: [4, 10, 2, 20]:", testArr);
 
 testArr = [1, -2, 0];
-multiplyArrayBy([1, -2, 0], -3)
+multiplyArrayBy(testArr, -3)
 console.log("Multiply: [-3, 6, 0]:", testArr);
 
 testArr = [90];
-multiplyArrayBy([90], 10)
+multiplyArrayBy(testArr, 10)
 console.log("Multiply: [900]:", testArr);
 
 testArr = [5, -20, 49];
@@ -149,3 +154,26 @@ console.log("Multiply: []:", testArr);
 // Ex: [["Carolina", 28], ["Alex", 18], ["Georges", 31], ["Betty", 64]]
 // becomes
 // [["Alex", 18], ["Carolina", 28], ["Georges", 31], ["Betty", 64]]
+
+function sortThePeople(inArray) {
+    // inArray.sort();  // Only sorts by name.
+    // inArray.sort((a, b) => a[1] < b[1]);  // Compare functio needs to return a number, not a boolean.
+    // inArray.sort((a, b) => {
+    //     if (a[1] < b[1]) return -1; // Should return a negative number, if a is less than b.
+    //     else if (a[1] > b[1]) return 1;  // Positive if a is greater than b.
+    //     else return 0;  // Otherwise, return 0 if equal.
+    // });
+
+    inArray.sort((a, b) => a[1] - b[1]);  // Same as above.
+
+    // let sortedPeople = [];
+    // for (let i = 0; i < inArray.length; i++) {
+    //     let currPerson = inArray[i];
+
+    //     // Insert into the proper place in sortedPeople. Iterate through the loop from beginning to end and place the currPerson at the proper spot. (ie. the first spot the currPersons's age is greater than the spot's age)
+    // }
+    // inArray = sortThePeople;
+}
+
+sortThePeople(lotsOfPeople)
+console.log("SORTED:", lotsOfPeople);
