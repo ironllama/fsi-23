@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JS DOM Exercise 2</title>
+
+    <style>
+        table,
+        th,
+        tr,
+        td {
+            border: 1px solid black;
+        }
+
+        table {
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        td,
+        th {
+            padding: 3px 10px;
+            width: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Hello, <span>??</span> you are connected</h2>
+
+    <div class="myDiv" id="main">This is the text contained inside my div <a href="#">with a link</a></div>
+
+    <table id="myTable">
+        <tr>
+            <th style="border-color: green">Fruit</th>
+            <th style="border-color: #db2929">Color</th>
+        </tr>
+    </table>
+
+    <script>
+        // 1. In the h2 above, replace the ?? with your name
+
+
+        // 2. Recreate the same div as the one with id of "main" with only JS.
+        // Can you put it right under the existing one?
+
+
+        // 3. Recreate the same table as the table above with only JS under the existing table.
+        // <table id="myTable">
+        //     <tr>
+        //         <th style="border-color: green">Fruit</th>
+        //         <th style="border-color: #db2929">Color</th>
+        //     </tr>
+        // </table>
+
+
+        // 4. Use the next array in a loop to add appropriate row and columns in the table. 
+        const data = [
+            ["banana", "yellow"],
+            ["cherry", "red"],
+            ["apple", "green"],
+            ["grape", "green"],
+        ];
+
+
+        // 5. Use the next array to create a form select and the options list
+        // should look like this : <option value="en-US">English</option>
+        const options = [
+            { name: "English", value: "en-US" },
+            { name: "French", value: "fr-FR" },
+            { name: "German", value: "de-DE" },
+            { name: "Korean", value: "ko-KR" },
+            { name: "Japan", value: "ja-JP" },
+        ];
+
+
+        // BONUS:
+        // 6. Create a function that will add the fruit and color given as arguments appropriately into the table above.
+        // Eg. addRow("apple", "yellow") will add a new row with text of "apple" and "yellow"
+
+    </script>
+</body>
+
+</html>

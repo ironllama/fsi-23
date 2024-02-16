@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS DOM Exercise 1</title>
+    <style>
+        #moon {
+            width: 300px;
+            height: 250px;
+            display: block;
+            background: url('moon.jpeg') no-repeat;
+            background-size: cover;
+        }
+
+        #moon[data-state='sun'] {
+            width: 450px;
+            background: url('sun.jpeg') no-repeat;
+            background-size: cover;
+        }
+
+        #output3 {
+            font-size: 13px;
+            font-style: italic;
+            margin: 0.25em 0;
+            padding: 0.25em 40px;
+            line-height: 2em;
+            position: relative;
+            color: #fff;
+        }
+
+        #output3>div.quote {
+            color: blue;
+            font-size: 14px;
+            display: block;
+            margin-top: 5px;
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="output">Link to <a href="#">Wcoding</a></div>
+
+    <div id="output2"> my image <span id="moon"></span></div>
+
+    <div id="output3">Any fool can write code that a computer can understand. Good programmers write code that humans can understand.</div>
+
+    <script>
+        // 1. Edit the anchor link above to point to https://www.wcoding.com
+
+
+        // 2. Change the span above to show the sun picture, instead of the moon.
+        // Try using JS to take advantage of the existing CSS to make the change.
+
+
+        // 3. Wrap the text in "output3" above in another new div, with the class "quote".
+        // Keep everything inside "output3":
+        // <div id="output3"><div class="quote">Any fool can write code ... </div></div>
+        // Try using innerHTML where you can for the operations.
+
+    </script>
+</body>
+
+</html>
