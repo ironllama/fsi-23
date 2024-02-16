@@ -16,18 +16,70 @@
     <hr>
     <p>
         Using the following array:
+    </p>
     <pre>
         let languages = ['JavaScript', 'Node', 'Vue', 'React'];
     </pre>
     Create an unordered list with only JS that will appear in a browser like the following image:<br>
     <img src="./js-dom-exercise3-2.png">
-    </p>
+    <p></p>
     <hr>
     <p>
         Create an HTML file uploading section using only JS that will appear like the following image:<br>
         <img src="./js-dom-exercise3-3.png"><br>
         Note that the "No file chosen" text is automatically produced by the input element.
     </p>
+
+    <script>
+        // Q1
+        let wwwText = "The <strong>World Wide Web Consortium</strong> abbreviated as acronym <strong>W3C</strong>, is a ";
+        wwwText += "<a href='https://en.wikipedia.org/wiki/Standards_organization'>standards organization</a>";
+        wwwText += " non-profit organization responsible for promoting the compatibility of the ";
+        wwwText += "<a href='https://en.wikipedia.org/wiki/World_Wide_Web_Consortium'>World Wide Web<a>";
+
+        const a1 = document.createElement("div");
+        a1.style.padding = "0.3rem";
+        a1.innerHTML = wwwText;
+
+        const q1 = document.body.querySelector("p:first-child");
+        q1.appendChild(a1);
+
+
+        // Q2
+        let languages = ['JavaScript', 'Node', 'Vue', 'React'];
+
+        let newList = "Languages based on ECMAScript:";
+        newList += "<ul>";
+        for (const thisLang of languages) {
+            newList += `<li>${thisLang}</li>`;
+        }
+        newList += "</ul>";
+
+        const a2 = document.createElement("div");
+        a2.style.padding = "0.5rem";
+        a2.innerHTML = newList;
+
+        // const q2 = document.body.querySelector("p:nth-child(7)");
+        // You would think you could select the 2nd <p> and add your new stuff at the end of that <p>, but since the browsers do not like having a <pre> inside a <p>, it will end the start tag <p> for you just before the <pre> and create another start <p> before the corresponding </p>. And so, the <p> you are looking for is probably actually going to be the 3rd <p>.
+        const q2 = document.body.querySelector("p:nth-of-type(3)");
+        q2.appendChild(a2);
+
+
+        // Q3
+        let newInput = "<fieldset style='width: 625px; text-align: center;'>"; newInput += "<legend style='text-align: left;'>Upload an image</legend>";
+        newInput += "<label for='thingToUpload'>Image to upload:</label>"
+        newInput += "<input id='thingToUpload' type='file'><br>";
+        newInput += "<input style='margin-top: 1rem;' type='button' value='Send'>";
+        newInput += "</fieldset>";
+
+        const a3 = document.createElement("div");
+        a3.style.padding = "0.5rem";
+        a3.innerHTML = newInput;
+
+        const q3 = document.body.querySelector("p:nth-of-type(4)");
+        q3.appendChild(a3);
+
+    </script>
 </body>
 
 </html>
