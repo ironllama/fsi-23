@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            gap: 1rem;
+        }
+
+        .square {
+            width: 15rem;
+            height: 15rem;
+            background-color: cornflowerblue;
+            border-radius: .25rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .nina {
+            background-color: firebrick;
+        }
+
+        .lotsOfSquares {
+            display: flex;
+            gap: 0.25rem;
+        }
+
+        .small {
+            width: 5rem;
+            height: 5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="square" style="font-family: cursive;"></div>
+    <input type="text" placeholder="Type something here.">
+    <div class="lotsOfSquares">
+        <div class="square small"></div>
+        <div class="square small"></div>
+        <div class="square small"></div>
+        <div class="square small"></div>
+        <div class="square small"></div>
+        <div class="square small"></div>
+    </div>
+    <script>
+        let george = document.querySelector(".square");
+        george.addEventListener("click", e => {
+            // With direct element styling.
+            // if (george.style.backgroundColor === "cornflowerblue") {
+            //     george.style.backgroundColor = "firebrick";
+            // } else {
+            //     george.style.backgroundColor = "cornflowerblue";
+            // }
+
+            // With classList.
+            // if (george.classList.contains("nina")) {
+            //     george.classList.remove("nina");
+            // } else {
+            //     george.classList.add("nina");
+            // }
+
+            // With classList toggle.
+            george.classList.toggle("nina");
+
+            // With className.
+            // let ninaPos = george.className.indexOf("nina");
+            // if (ninaPos === -1) {
+            //     george.className += " nina";
+            // }
+            // else {
+            //     george.className = george.className.substring(0, ninaPos);
+            // }
+        });
+
+        let inputElem = document.querySelector("input");
+
+        // These need to be defined BEFORE they are called. They are not hoisted for you.
+        // const handleNewInput = (e) => {
+        // const handleNewInput = function () {
+        //     if (inputElem.value === "hello") {
+        //         george.textContent = "hello";
+        //     }
+        //     else {
+        //         george.textContent = "";
+        //     }
+        // }
+        inputElem.addEventListener("input", handleNewInput);
+        // Standard function declarations are automatically hoisted for you by JS.
+        function handleNewInput(e) {
+            if (inputElem.value === "hello") {
+                george.textContent = "hello";
+            }
+            else {
+                george.textContent = "";
+            }
+        }
+
+        let allSmalls = document.querySelectorAll(".lotsOfSquares .small");
+        allSmalls.forEach(oneSmall => {
+            // Each gets their own event listener.
+            // oneSmall.addEventListener("click", e => oneSmall.classList.toggle("nina"));
+
+            // All share an event listener;
+            // oneSmall.addEventListener("click", ninaToggleWithElem(oneSmall));  // Doesn't work. Calls function immediately.
+            // oneSmall.addEventListener("click", () => ninaToggleWithElem(oneSmall));  // Function to call in future, when click happens.
+            oneSmall.addEventListener("click", ninaToggle);  // Let the handler figure out who initiated the event.
+        });
+
+        function ninaToggleWithElem(thisElem) {
+            thisElem.classList.toggle("nina");
+        }
+
+        function ninaToggle(event) {
+            let elemThatTriggerTheEvent = event.target;  // Get the element that initiated the event.
+            // let elemThatTriggerTheEvent = this;  // Also works, but can be tricky.
+            elemThatTriggerTheEvent.classList.toggle("nina");
+        }
+    </script>
+</body>
+
+</html>
