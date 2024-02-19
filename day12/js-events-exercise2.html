@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html {
+            font-size: 8px;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: sans-serif;
+            font-weight: bold;
+            gap: 2rem;
+        }
+
+        .title {
+            font-size: 10rem;
+        }
+
+        .boardAndHistory {
+            display: flex;
+            gap: 10rem;
+        }
+
+        .board {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .row {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .square {
+            width: 10rem;
+            height: 10rem;
+            border-radius: 5px;
+            border: 1px solid black;
+            font-size: 10rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: cornflowerblue;
+        }
+
+        .historyTitle {
+            font-size: 3rem;
+        }
+
+        .historyMoves {
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .historyMoves li {
+            font-size: 2.5rem;
+            list-style: none;
+        }
+
+        button {
+            border: none;
+            padding: 1rem 3rem;
+            background-color: cornflowerblue;
+            color: white;
+            font-size: 3rem;
+            font-weight: inherit;
+            border-radius: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="title"></div>
+    <div class="boardAndHistory">
+        <div class="board"></div>
+        <div class="history">
+            <div class="historyTitle">Move History</div>
+            <ul class="historyMoves"></ul>
+        </div>
+    </div>
+    <button>PLAY AGAIN</button>
+    <script>
+        // Exercise: Tic-tac-toe Game
+
+        // 1. Create a tic-tac-toe game board. There is to be a 3x3 grid of boxes in HTML. You are free to manually create the HTML or use JS to create the boxes. Style appropriately to suit you with CSS.
+
+        // 2. Create the logic to react appropriately (X's and O's) to click events on the boxes. Clicking on an box already taken (X or O) should not do anything on that box.
+
+        // 3. Update the interface to display the next turn (X's or O's).
+
+        // 4. Create a function to determine winning combinations and add it to the existing logic to check for a win condition. There are many different ways to determine a win -- find one that works for you and implement it!
+
+        // 5. Upon completion of a game, announce the winner and present a "Play Again" button that resets the board for another round.
+
+
+        // BONUS:
+
+        // 6. When hovering over a valid next move, the box background should turn a shade of green. When hoving over an invalid move, the box background should turn red.
+
+        // 7. Keep a history of all moves taken and display each point in the "move history" as a link somewhere on the UI. (Eg. Move #5) The current move state will be a link in the move history called "Current".
+        // Clicking on the link in the move list should take the gameboard back to that point in the move history.
+
+        // 8. Even while viewing a past move using the move history, the user can then play another move, which creates a new future to follow (ie, resets the move history links to follow this new move into a new future),
+        // or they can click back to any other move in the move history, including the future moves if they exist, including "Current" to get back to where they were before reviewing move history.
+
+    </script>
+</body>
+
+</html>

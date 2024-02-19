@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+        #ex1 {
+            text-align: center;
+            font-size: 40px;
+        }
+
+        #ex3 {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0px;
+        }
+
+        .element {
+            display: flex;
+            width: 200px;
+            height: 200px;
+            border: 1px solid black;
+            align-items: center;
+            justify-content: center;
+        }
+
+        button {
+            padding: 10px 20px;
+        }
+
+        input[type="text"] {
+            height: 20px;
+            width: 100px;
+            margin: 10px 2px;
+        }
+
+        #capitalized {
+            display: block;
+            height: 30px;
+            width: 300px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Exercise 1 -->
+    <h2 id="ex1">Hover me!</h2>
+
+    <br />
+    <!--  Exercise 2  -->
+    <button id="ex2">Click me!</button>
+
+    <!--  Exercise 3  -->
+    <!--  Exercise 4  -->
+    <div id="ex3">
+        <div class="element">first</div>
+        <div class="element">second</div>
+        <div class="element">third</div>
+        <div class="element">fourth</div>
+        <div class="element">fifth</div>
+    </div>
+    <!-- Bonus 1 -->
+    <input type="text" id="mouse-x" readonly /><input id="mouse-y" type="text" readonly />
+
+    <!--  Bonus 2  -->
+    <input type="text" id="capitalized" placeholder="all the text should be capitalize" />
+    <script>
+        document.addEventListener("DOMContentLoaded", e => console.log(e));
+
+        // 1. Highlight the ex1 text when hovered using js events (not css!)
+
+        // 2. When the button is clicked, display an alert: "The button has been clicked!"
+
+        // 3. Using only js events, make the background color of the odd elements blue and the even elements red when the divs hovered
+
+        // 4. When divs are clicked, change the text of the div to "clicked"
+
+        // BONUS
+        // 5. In the Bonus 1 inputs, show the position of the mouse: the X axis position and the Y axis position
+
+        // 6. When text is added into the Bonus 2 input, capitalize it
+
+        // 7. Using JS, don't let any number get inserted into the Bonus 2 input
+    </script>
+</body>
+
+</html>
