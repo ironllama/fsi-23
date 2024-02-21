@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XHR</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
+
+    <style>
+        html {
+            font-size: 10px;
+        }
+
+        body {
+            margin: 0;
+            background-color: gold;
+            color: rgba(30, 30, 30, 1);
+            font-family: "Shadows Into Light", cursive;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 10rem;
+        }
+
+        #jokesetup {
+            font-size: 5rem;
+        }
+
+        #jokepunchline {
+            display: none;
+            margin-top: 3rem;
+            font-size: 7rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Awesome Jokes</h1>
+    <div id="jokesetup">...</div>
+    <div id="jokepunchline">...</div>
+
+    <script>
+        const setupElem = document.getElementById("jokesetup");
+        const punchlineElem = document.getElementById("jokepunchline");
+
+        const xhrThing = new XMLHttpRequest();  // Create
+        xhrThing.open("GET", "https://official-joke-api.appspot.com/random_joke");  // Setup
+        xhrThing.addEventListener("load", function () {  // When response received
+            // console.log("RESPONSE:", xhrThing.response);
+            let responseObject = JSON.parse(xhrThing.response);  // JSON text --> JS Object
+
+            setupElem.innerHTML = responseObject.setup;
+            punchlineElem.innerHTML = responseObject.punchline;
+        });
+        xhrThing.send();  // GO GO GO!
+
+        setupElem.addEventListener("click", function () {
+            punchlineElem.style.display = "block";
+        });
+    </script>
+</body>
+
+</html>
