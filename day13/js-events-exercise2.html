@@ -115,6 +115,48 @@
         // 8. Even while viewing a past move using the move history, the user can then play another move, which creates a new future to follow (ie, resets the move history links to follow this new move into a new future),
         // or they can click back to any other move in the move history, including the future moves if they exist, including "Current" to get back to where they were before reviewing move history.
 
+
+        const boardElem = document.querySelector(".board");
+        const titleElem = document.querySelector(".title");
+
+        let currentMove = 0;
+        updateNextMove();
+
+        function updateNextMove() {
+            currentMove += 1;
+            if (currentMove % 2 === 0) titleElem.innerHTML = `Next Player: O`;
+            else titleElem.innerHTML = `Next Player: X`;
+        }
+
+        for (let i = 0; i < 3; i++) {
+            const newRow = document.createElement("div");
+            newRow.className = "row";
+
+            for (let k = 0; k < 3; k++) {
+                const newSquare = document.createElement("div");
+                newSquare.className = "square";
+
+                newSquare.addEventListener("click", handleClick);
+
+                newRow.appendChild(newSquare);
+            }
+
+            boardElem.appendChild(newRow);
+        }
+
+
+        function handleClick(event) {
+            if (event.target.innerHTML === "") {
+                if (currentMove % 2 == 0) {
+                    event.target.innerHTML = "O";
+                }
+                else {
+                    event.target.innerHTML = "X";
+                }
+
+                updateNextMove();
+            }
+        }
     </script>
 </body>
 
