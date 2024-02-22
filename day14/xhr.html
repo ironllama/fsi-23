@@ -36,7 +36,6 @@
         }
 
         #jokepunchline {
-            display: none;
             margin-top: 3rem;
             font-size: 7rem;
             font-weight: bold;
@@ -53,20 +52,32 @@
         const setupElem = document.getElementById("jokesetup");
         const punchlineElem = document.getElementById("jokepunchline");
 
-        const xhrThing = new XMLHttpRequest();  // Create
-        xhrThing.open("GET", "https://official-joke-api.appspot.com/random_joke");  // Setup
-        xhrThing.addEventListener("load", function () {  // When response received
-            // console.log("RESPONSE:", xhrThing.response);
-            let responseObject = JSON.parse(xhrThing.response);  // JSON text --> JS Object
+        function getNewJoke() {
+            // Reset the display for a new joke.
+            setupElem.innerHTML = "...";
+            punchlineElem.style.display = "none";
 
-            setupElem.innerHTML = responseObject.setup;
-            punchlineElem.innerHTML = responseObject.punchline;
-        });
-        xhrThing.send();  // GO GO GO!
+            // Get a new joke from the API.
+            const xhrThing = new XMLHttpRequest();  // Create
+            xhrThing.open("GET", "https://official-joke-api.appspot.com/random_joke");  // Setup
+            xhrThing.addEventListener("load", function () {  // When response received
+                // console.log("RESPONSE:", xhrThing.response);
+                let responseObject = JSON.parse(xhrThing.response);  // JSON text --> JS Object
+
+                // Populate the DOM/UI with the new data.
+                setupElem.innerHTML = responseObject.setup;
+                punchlineElem.innerHTML = responseObject.punchline;
+            });
+            xhrThing.send();  // GO GO GO!
+        }
+
+        getNewJoke();  // Bootstrap. Need the first joke to appear.
 
         setupElem.addEventListener("click", function () {
             punchlineElem.style.display = "block";
         });
+
+        punchlineElem.addEventListener("click", getNewJoke);
     </script>
 </body>
 

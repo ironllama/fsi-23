@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Callbacks</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            gap: 1rem;
+        }
+
+        .square {
+            width: 15rem;
+            height: 15rem;
+            background-color: cornflowerblue;
+            border-radius: .25rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="square"></div>
+    <script>
+        // document.querySelector(".square").addEventListener("click", function () {
+        //     alert("Boom.");
+        // });
+        document.querySelector(".square").addEventListener("click", () => alert("Boom."));
+
+        const nums = [23, 176, 6, 17];
+        console.log("NUMS:", nums);
+        // nums.sort(function nina(x, y) { return x - y; });
+        nums.sort((x, y) => x - y);
+        console.log("NUMS:", nums);
+
+        const newNums = nums.map(num => num + 12);
+        console.log("NEW NUMS:", newNums);
+
+        console.log("BEGIN");
+
+        const donePromise = new Promise((res) => {
+            setTimeout(() => {
+                console.log("DONE");
+                res();
+            }, 5000);
+        });
+        donePromise
+            .then(() => {  // The "then" starts the "promise"
+                console.log("PROMISE RESOLVED");
+                return new Promise((res) => {
+                    setTimeout(() => res("RED"), 3000);
+                })
+            })
+            .then((color) => {
+                console.log("SECOND PROMISE RESOLVED", color);
+            })
+            .catch(() => {
+                console.error("ERROR, WIL ROBINSON.");
+            });
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Randon Dogs</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            gap: 1.5rem;
+        }
+
+        .imageWrapper {
+            height: 15rem;
+            width: 15rem;
+            border-radius: 5px;
+            background-color: lightcyan;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        img {
+            height: 15rem;
+        }
+
+        button {
+            padding: 0.5rem 3rem;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="imageWrapper">
+        <img src="">
+    </div>
+    <button>Next Dog</button>
+    <script>
+        const dogPicElem = document.querySelector("img");
+        const nextDogButton = document.querySelector("button");
+
+        function showNewDog() {
+            // const dogApi = new XMLHttpRequest();
+            // dogApi.open("GET", "https://dog.ceo/api/breeds/image/random");
+            // dogApi.addEventListener("load", function () {
+            //     const dogResult = JSON.parse(dogApi.response);
+            //     // console.log("DOG:", dogResult);
+
+            //     dogPicElem.src = dogResult.message;
+            // });
+            // dogApi.send();
+
+            fetch("https://dog.ceo/api/breeds/image/random")
+                .then(resp => resp.json())
+                .then(dogResult => {
+                    dogPicElem.src = dogResult.message;
+                });
+
+            // .then(function (resp) {
+            //     resp.json()
+            //         .then(function (dogResult) {
+            //             dogPicElem.src = dogResult.message;
+            //         })
+            // })
+
+            // .then(function (resp) {
+            //     return resp.json();
+            // })
+            // .then(function (dogResult) {
+            //     dogPicElem.src = dogResult.message;
+            // })
+        }
+        showNewDog();
+
+        nextDogButton.addEventListener("click", showNewDog);
+    </script>
+</body>
+
+</html>
