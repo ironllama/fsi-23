@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universities</title>
+</head>
+
+<body>
+    <div id="combo">
+        <input tabindex="1" type="text" placeholder="Enter the name of a university...">
+        <div id="matches"></div>
+        <button tabindex="2">Search</button>
+    </div>
+    <div id="results"></div>
+    <script>
+        // Use the following API endpoint to get a list of schools:
+        // http://universities.hipolabs.com/search?country=United+States
+
+        // Create a combo input box - a text input (ie. the HTML input above) that will display all the school names that match your text in a separate area under the text input (ie. the "matches" HTML element above), using simple string matching rules. To keep it fast, but useful, make sure the user types in at least a few characters before suggesting matches. (eg. 3 characters minimum).
+
+        // The matches area should not change or displace the layout of any other element (eg. the "results" element). It should, in effect, seem to appear "above" other elements.
+
+        // When the user clicks on one of the matching school names (ie. in the "matches" HTML element), the UI needs to fill the input box with the selected matching school name.
+
+        // The button next to the input box (ie. the "Search" button) will, when clicked, display all the information about the school in a separate area of the web page (ie. the "results" element). Display each as "key: value". For example:
+        // Name: Marywood University
+        // Web Page: http://www.marywood.edu
+        // Country: "United States"
+
+        // Feel free to add in any other behavior or features to your combo box!
+    </script>
+</body>
+
+</html>
