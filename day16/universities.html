@@ -5,9 +5,104 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Universities</title>
+    <style>
+        :root {
+            --gen-border-radius: 5px;
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            /* justify-content: center; */
+            align-items: center;
+            flex-direction: column;
+            font-family: sans-serif;
+            font-weight: bold;
+            font-size: 1.25rem;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background-image: url('https://media.istockphoto.com/id/1366624125/photo/mother-and-graduating-daughter-pose-cheek-to-cheek-for-photo.jpg?s=612x612&w=0&k=20&c=Ctm_MVP3OB4sz7ri8ujXYpVNbytqoiK0Bxc3hYeRRBQ=');
+            background-size: cover;
+            background-repeat: no-repeat;
+            filter: blur(5px) opacity(60%) sepia(75%);
+            z-index: -1;
+        }
+
+        #combo {
+            margin-top: 10rem;
+            display: flex;
+            gap: 0.25rem;
+            position: relative;
+        }
+
+        input {
+            width: 30rem;
+            /* height: 1.5rem; */
+            border-radius: var(--gen-border-radius);
+            border: 1px solid grey;
+            outline: none;
+            padding: 0.5rem 0.5rem;
+            font-size: inherit;
+        }
+
+        button {
+            background-color: slateblue;
+            color: white;
+            width: 200px;
+            font-size: inherit;
+            font-weight: inherit;
+            border: none;
+            border-radius: var(--gen-border-radius);
+        }
+
+        #matches {
+            position: absolute;
+            top: 2.6rem;
+            border: 1px solid lightgray;
+            background: white;
+            width: 30rem;
+            box-sizing: border-box;
+            display: none;
+        }
+
+        #matches>div {
+            padding: 0.1rem 0.5rem;
+        }
+
+        #matches>div:focus {
+            background-color: bisque;
+            outline: none;
+        }
+
+        #results {
+            height: 15rem;
+            background: white;
+            padding: 2rem 4rem;
+            border-radius: var(--gen-border-radius);
+            background-color: transparent;
+        }
+
+        .detailRow {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .detailRowProp {
+            width: 10rem;
+            text-align: right;
+        }
+    </style>
 </head>
 
 <body>
+    <div class="overlay"></div>
     <div id="combo">
         <input tabindex="1" type="text" placeholder="Enter the name of a university...">
         <div id="matches"></div>
@@ -15,10 +110,105 @@
     </div>
     <div id="results"></div>
     <script>
+        const inputElem = document.querySelector("input");
+        const matchesElem = document.querySelector("#matches");
+        const resultsElem = document.querySelector("#results");
+        const searchButton = document.querySelector("button");
+
         // Use the following API endpoint to get a list of schools:
         // http://universities.hipolabs.com/search?country=United+States
 
+        let allSchools;
+        fetch("http://universities.hipolabs.com/search?country=United+States")
+            .then(res => res.json())
+            .then(res => allSchools = res);
+
         // Create a combo input box - a text input (ie. the HTML input above) that will display all the school names that match your text in a separate area under the text input (ie. the "matches" HTML element above), using simple string matching rules. To keep it fast, but useful, make sure the user types in at least a few characters before suggesting matches. (eg. 3 characters minimum).
+        inputElem.addEventListener("input", function (event) {
+            if (inputElem.value.length >= 3) {
+                // console.log("INPUT:", event.target.value);
+                // const matchingSchools = allSchools.filter(
+                //     function myFilter(school) {  // Has a name, but never called. Not needed.
+                //         return school.name === event.target.value;
+                //     }
+                // );  // Filter function will call my myFilter function once for each item in allSchools.
+                const inputName = inputElem.value.toLowerCase();
+                // const matchingSchools = allSchools.filter(school => school.name.toLowerCase().includes(inputName));
+                const matchingSchools = allSchools.filter(school => school.name.toLowerCase().indexOf(inputName) !== -1);
+                // const matchingSchools = allSchools.filter(school => school.name.match(/inputName/gi) !== null);
+
+                // Create a string to accumulate the new HTML to insert.
+                let matchingSchoolsHtml = "";
+                matchingSchools.forEach((school, is) => matchingSchoolsHtml += `<div tabindex="${is + 3}">${school.name}</div>`);
+                matchesElem.innerHTML = matchingSchoolsHtml;
+                matchesElem.style.display = "block";
+
+                // Add an event listener to all the newly created and added matches. (All the divs added.)
+                const allMatches = matchesElem.querySelectorAll("div");
+                allMatches.forEach(match => match.addEventListener("click", matchToInput));
+            }
+        });
+
+        // Shared function for when any matching school in the matching school list is clicked.
+        function matchToInput(event) {
+            inputElem.value = event.target.innerHTML;  // Get the text of the matching school.
+            inputElem.focus();  // Focus on it (useful if allowing use of 'Enter' key).
+            matchesElem.style.display = "none";  // Hide the matches.
+        }
+
+        // When the Search button is pushed...
+        searchButton.addEventListener("click", doSearch);
+
+        inputElem.addEventListener("keyup", function (event) {
+            if (inputElem.value.length >= 3) {
+                if (event.key === "Enter") {
+                    doSearch();
+                }
+                else if (event.key === "ArrowDown") {
+                    matchesElem.querySelector("div").focus();
+                    event.preventDefault();
+                }
+            }
+        });
+
+        matchesElem.addEventListener("keyup", function (event) {
+            if (["ArrowDown", "ArrowUp"].includes(event.key)) {
+                // Get the current matching item in focus and extract the tab index.
+                const currElem = matchesElem.querySelector("div:focus");
+                const currTabIndex = currElem.tabIndex;
+
+                // Normally add one, except on up arrow, we subtract one.
+                let nextIdx = 1;
+                if (event.key === "ArrowUp") nextIdx = -1;
+
+                // Focus the next element.
+                const nextElem = matchesElem.querySelector(`div[tabindex="${currTabIndex + nextIdx}"]`);
+                if (nextElem) nextElem.focus();
+
+                // event.preventDefault();  // Try to prevent scrolling. Might not be effective.
+            }
+            else if (event.key === "Enter") {
+                matchToInput(event);
+            }
+        })
+
+        function doSearch() {
+            const inputName = inputElem.value.toLowerCase();
+            // Using find, since we only need to find one (first) match.
+            const resultSchool = allSchools.find(school => school.name.toLowerCase() === inputName);
+
+            resultsElem.innerHTML = "";  // Blank out the previous results.
+            if (resultSchool) {
+                for (let prop of Object.keys(resultSchool)) {  // Loop through all the properties (name, domain, etc.)
+                    // Concat into the results.
+                    resultsElem.innerHTML += `
+                        <div class="detailRow">
+                            <div class="detailRowProp">${prop}:</div>
+                            <div>${resultSchool[prop]}</div
+                        </div>`;
+                }
+            }
+        }
 
         // The matches area should not change or displace the layout of any other element (eg. the "results" element). It should, in effect, seem to appear "above" other elements.
 
