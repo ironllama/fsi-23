@@ -1,0 +1,51 @@
+:root {
+    --gen-border-radius: 5px;
+}
+
+#combo {
+    margin-top: 10rem;
+    display: flex;
+    gap: 0.25rem;
+    position: relative;
+}
+
+input {
+    width: 30rem;
+    /* height: 1.5rem; */
+    border-radius: var(--gen-border-radius);
+    border: 1px solid grey;
+    outline: none;
+    padding: 0.5rem 0.5rem;
+    font-size: inherit;
+}
+
+button {
+    background-color: slateblue;
+    color: white;
+    width: 200px;
+    font-size: inherit;
+    font-weight: inherit;
+    border: none;
+    border-radius: var(--gen-border-radius);
+}
+
+#matches {
+    position: absolute;
+    top: 2.6rem;
+    border: 1px solid lightgray;
+    background: white;
+    width: 30rem;
+    box-sizing: border-box;
+    display: none;
+    max-height: 25rem;
+    overflow: scroll;
+}
+
+#matches>div {
+    padding: 0.1rem 0.5rem;
+}
+
+#matches>div:focus {
+    background-color: bisque;
+    outline: none;
+}

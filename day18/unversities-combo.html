@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universities</title>
+    <link rel="stylesheet" href="combo.css">
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            /* justify-content: center; */
+            align-items: center;
+            flex-direction: column;
+            font-family: sans-serif;
+            font-weight: bold;
+            font-size: 1.25rem;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background-image: url('https://media.istockphoto.com/id/1366624125/photo/mother-and-graduating-daughter-pose-cheek-to-cheek-for-photo.jpg?s=612x612&w=0&k=20&c=Ctm_MVP3OB4sz7ri8ujXYpVNbytqoiK0Bxc3hYeRRBQ=');
+            background-size: cover;
+            background-repeat: no-repeat;
+            filter: blur(5px) opacity(60%) sepia(75%);
+            z-index: -1;
+        }
+
+        #results {
+            height: 15rem;
+            background: white;
+            padding: 2rem 4rem;
+            border-radius: var(--gen-border-radius);
+            background-color: transparent;
+        }
+
+        .detailRow {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .detailRowProp {
+            width: 10rem;
+            text-align: right;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="overlay"></div>
+    <div id="comboWrapper"></div>
+    <div id="results"></div>
+    <script src="combo.js"></script>
+    <script>
+        const resultsElem = document.querySelector("#results");
+
+        // Use the following API endpoint to get a list of schools:
+        // http://universities.hipolabs.com/search?country=United+States
+
+        let allSchools;
+        fetch("http://universities.hipolabs.com/search?country=United+States")
+            .then(res => res.json())
+            .then(res => {
+                allSchools = res;
+
+                // Extract the school names as the list of strings for the combo box to use as possible matches.
+                const schoolNames = allSchools.map(school => school.name);
+
+                // Find the parent wrapper element and call the function that creates the combo input.
+                const comboWrapper = document.querySelector("#comboWrapper");
+                createCombo(comboWrapper, schoolNames, gotSearchResult);
+            });
+
+        function gotSearchResult(inSchoolName) {
+            const resultSchool = allSchools.find(school => school.name === inSchoolName);
+            if (resultSchool) {
+                resultsElem.innerHTML = "";  // Blank out the previous results.
+                if (resultSchool) {
+                    for (let prop of Object.keys(resultSchool)) {  // Loop through all the properties (name, domain, etc.)
+                        // Concat into the results.
+                        resultsElem.innerHTML += `
+                        <div class="detailRow">
+                            <div class="detailRowProp">${prop}:</div>
+                            <div>${resultSchool[prop]}</div
+                        </div>`;
+                    }
+                }
+            }
+        }
+
+    </script>
+</body>
+
+</html>

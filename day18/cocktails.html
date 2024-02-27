@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cocktails</title>
+    <link rel="stylesheet" href="combo.css">
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            /* justify-content: center; */
+            align-items: center;
+            flex-direction: column;
+            font-family: sans-serif;
+            font-weight: bold;
+            font-size: 1.25rem;
+        }
+
+        #drinkPicture {
+            width: 15rem;
+            height: 15rem;
+            margin-top: 3rem;
+        }
+
+        img {
+            width: 15rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="inputArea"></div>
+    <div id="drinkPicture"></div>
+
+    <script src="allCocktails.js"></script>
+    <script src="combo.js"></script>
+    <script>
+        const inputAreaElem = document.getElementById("inputArea");
+        const drinkPicElem = document.getElementById("drinkPicture");
+
+        // Isolate just the drink names for the combo input.
+        const drinkNames = allDrinks.map(drink => drink.strDrink);
+
+        createCombo(inputAreaElem, drinkNames, gotName);
+
+        function gotName(inName) {
+            const foundDrink = allDrinks.find(drink => drink.strDrink === inName);
+            if (foundDrink) {
+                const newImg = document.createElement("img");
+                newImg.src = foundDrink.strDrinkThumb;
+
+                drinkPicElem.innerHTML = "";
+                drinkPicElem.appendChild(newImg);
+            }
+        }
+    </script>
+</body>
+
+</html>
