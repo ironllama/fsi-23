@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dog Breeds</title>
+    <link rel="stylesheet" href="combo.css">
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            /* justify-content: center; */
+            align-items: center;
+            flex-direction: column;
+            font-family: sans-serif;
+            font-weight: bold;
+            font-size: 1.25rem;
+            background-size: cover;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url(https://imgs.search.brave.com/0PuROCLb5isGvde3mNn2Lf8_2cD9-PugWxIUEpAbVGQ/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9oZWxs/b2JhcmsuY29tL3dw/LWNvbnRlbnQvdXBs/b2Fkcy9nb2xkZW4t/cmV0cmlldmVyLTEy/MDAuanBn);
+        }
+
+        #drinkPicture {
+            width: 15rem;
+            height: 15rem;
+            margin-top: 3rem;
+        }
+
+        img {
+            width: 15rem;
+        }
+
+        #subBreeds {
+            margin: 3rem;
+            text-align: center;
+        }
+
+        li {
+            list-style: none;
+            padding: 0.5rem;
+            background: cornflowerblue;
+            color: white;
+            border-radius: 5px;
+            display: inline-block;
+            margin: 0.25rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="inputArea"></div>
+    <div id="subBreeds"></div>
+
+    <script src="allCocktails.js"></script>
+    <script src="combo.js"></script>
+    <script>
+        const inputAreaElem = document.getElementById("inputArea");
+        const subBreedsElem = document.getElementById("subBreeds");
+
+        let allBreeds = [];
+        fetch("https://dog.ceo/api/breeds/list/all")
+            .then(res => res.json())
+            .then(res => {
+                allBreeds = res;
+                const allBreedNames = Object.keys(allBreeds.message);
+
+                createCombo(inputAreaElem, allBreedNames, gotName);
+            })
+
+
+        function gotName(inName) {
+            const subBreeds = allBreeds.message[inName];
+            subBreedsElem.innerHTML = "";
+
+            let newHTML = "";
+            if (subBreeds.length > 0) {
+                newHTML += "<h3>Sub-breeds</h3><ul>";
+                subBreeds.forEach(sb => newHTML += `<li>${sb}</li>`);
+                newHTML += "</ul>";
+            }
+            else newHTML = "<h3>No sub-breeds!</h3>";
+
+            subBreedsElem.innerHTML = newHTML;
+        }
+    </script>
+</body>
+
+</html>
