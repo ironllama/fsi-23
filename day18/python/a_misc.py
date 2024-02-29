@@ -1,4 +1,4 @@
-# https://staritda.notion.site/Python-Beginners-7f1e41c29e9c4a96a7b81e321d3f9c6c#fed9ba28d8f14471bea9e46e0f857726
+# https://wcode.notion.site/Python-Beginners-7f1e41c29e9c4a96a7b81e321d3f9c6c#fed9ba28d8f14471bea9e46e0f857726
 # Strings
 
 print(1, "good " "food")  # Not very useful?
