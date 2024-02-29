@@ -1,3 +1,6 @@
+# https://staritda.notion.site/Python-Beginners-7f1e41c29e9c4a96a7b81e321d3f9c6c#fed9ba28d8f14471bea9e46e0f857726
+# Strings
+
 print(1, "good " "food")  # Not very useful?
 print(2, "good food")  # Why not just do this?! Why have the break between strings?!
 
@@ -32,3 +35,35 @@ print("Length of excitement:", len(excited))
 new_first = full_name[0:6]
 new_last = full_name[15:]  # You can omit the last number to go until the end of the string.
 print("FIRST LAST:", new_first, new_last)
+
+
+# F-strings
+name = "Sofia"
+age = 31
+job = "programmer"
+
+sentence = f"My friend {name} is a {age} year old {job} living in New York."
+print(sentence)
+
+print("Ba" + ("na" * 3))
+
+greeting = 'Hi! '
+greetings = greeting * 10
+print(greetings)
+
+shout = 'hello there'.upper()
+print(shout)
+
+whisper = 'SHHHHH'.lower()
+print(whisper)
+
+book = 'harry potter'.title()
+print(book)
+
+no_js = 'jump jay jump!'.replace('j', '')
+print(no_js)
+
+name = 'Joseph'
+name += ' Sungpil'
+name += ' Choi'
+print('full name:', name)

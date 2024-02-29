@@ -32,4 +32,8 @@ print(something)
 # Sample String : 'restart'
 # Expected Result : 'resta$t'
 
-print(tongue_twister[0] + tongue_twister[1:].replace(tongue_twister[0], '$'))
+first_letter = tongue_twister[0]
+rest_of_word = tongue_twister[1:].replace(first_letter, '$')
+print(first_letter + rest_of_word)
+
+# print(tongue_twister[0] + tongue_twister[1:].replace(tongue_twister[0], '$'))  # Same as one line. Cryptic?

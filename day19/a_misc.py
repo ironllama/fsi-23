@@ -1,3 +1,5 @@
+# https://staritda.notion.site/Python-Beginners-7f1e41c29e9c4a96a7b81e321d3f9c6c#a26d68d4b8204651baa7c50fdcafe85e
+# Conditions: if, elif, else
 some_var = 20
 
 if some_var < 10:
