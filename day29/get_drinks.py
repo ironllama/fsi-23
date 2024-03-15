@@ -16,7 +16,20 @@ while True:
     if ("drinks" in response  # If response has a property called "drinks"
             and response["drinks"]  # If it is not null/None and is not empty
         ):
-        drinks = response["drinks"][0]
-        print("NAME:", drinks["strDrink"])
+        drink = response["drinks"][0]
+        print(f"===== {drink['strDrink']} =====")
+
+        print(f"Ingredients:")
+        for i in range(15):
+            new_ingredient = "strIngredient" + str(i + 1)
+            if new_ingredient in drink and drink[new_ingredient]:
+                print(f"{drink[new_ingredient]} -- {drink['strMeasure' + str(i + 1)]}")
+            else:
+                break
+        print()
+
+        print(f"Directions:")
+        print(drink["strInstructions"])
+        print()
     else:
         print(f"\tCan't seem to find a cocktail called {user_input}!")
