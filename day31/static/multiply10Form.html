@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiply 10 Form</title>
+</head>
+
+<body>
+    <form method="POST">
+        <input name="number" id="user_num" type="number">
+        <button>Go!</button>
+    </form>
+    <div id="response"></div>
+    <script>
+        document.forms[0].addEventListener("submit", (e) => {
+            console.log("INTERCEPTED SUBMIT!");
+
+            fetch("/multiply10", {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    "number": document.getElementById("user_num").value
+                })
+            })
+                .then(res => res.json())
+                .then(res => {
+                    document.getElementById("response").innerHTML = res.result;
+                });
+
+            e.preventDefault();
+        })
+    </script>
+</body>
+
+</html>
