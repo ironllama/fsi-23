@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block headstuff%}
+<title>Trivia</title>
+<style>
+    #wrapper {
+        font-size: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 80%;
+    }
+
+    #question {
+        font-size: 3rem;
+        text-align: center;
+    }
+
+    #guesses {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    button {
+        min-width: 20rem;
+        padding: 1rem 1rem 0.5rem;
+        background-color: cornflowerblue;
+        border: 2px solid steelblue;
+        border-radius: 5px;
+        color: white;
+        font-family: inherit;
+        font-size: inherit;
+        font-weight: bold;
+    }
+
+    button:hover {
+        background-color: steelblue;
+    }
+
+    .guessed {
+        background-color: steelblue;
+    }
+
+    #results {
+        color: orangered;
+        margin-top: 1rem;
+    }
+</style>
+{% endblock %}
+
+{% block mainstuff %}
+<div id="wrapper">
+    <div id="question">{{ trivia.question }}</div>
+    <div id="guesses">
+        {% for guess in trivia.guesses %}
+        <button class="guess">{{ guess }}</button>
+        {% endfor %}
+    </div>
+    <div id="results"></div>
+</div>
+<script>
+    const guessesElem = document.querySelectorAll(".guess");
+    const resultsElem = document.querySelector("#results");
+
+    guessesElem.forEach(elem => elem.addEventListener("click", handleClick));
+
+    function handleClick(evt) {
+        evt.target.removeEventListener("click", handleClick);
+        evt.target.classList.add("guessed");
+        submitGuess(evt.target.innerHTML);
+    }
+
+    function submitGuess(guess) {
+        fetch("/trivia/{{ q_id }}?guess=" + guess)
+            .then(res => res.text())
+            .then(res => {
+                if (res === "True") {
+                    resultsElem.innerHTML = "Correct!"
+                    setTimeout(() => window.location.reload(), 1000);
+                }
+                else
+                    resultsElem.innerHTML = "Sorry, try again."
+            });
+    }
+</script>
+{% endblock %}

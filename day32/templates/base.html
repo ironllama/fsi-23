@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block headstuff %}
+    <title>Document</title>
+    {% endblock %}
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <nav>
+        <div>
+            <a href="{{ url_for('home') }}">
+                <img src="/static/jetsons-logo.webp">
+            </a>
+        </div>
+        <div class="right_nav">
+            <a href="{{ url_for('chars') }}">Characters</a>
+            <a href="{{ url_for('trivia') }}">Trivia</a>
+        </div>
+    </nav>
+    <main>
+        {% block mainstuff %}
+        {% endblock %}
+    </main>
+    <footer>
+        {% block footerthings %}
+        © 2024 Someone. All rights reserved. The material on this site may not be reproduced, distributed, transmitted, cached or otherwise used, except with the prior written permission of Someone.
+        {% endblock %}
+    </footer>
+</body>
+
+</html>

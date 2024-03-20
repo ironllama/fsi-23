@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask Requests</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <fieldset>
+        <legend>/numvowels</legend>
+        <div>
+            <form id="numvowel" method="get">
+                <label for="word">Enter a word: </label>
+                <input id="word" name="word" type="text">
+                <button>Submit</button>
+            </form>
+            <div>Result: <span id="numvowel_results"></span></div>
+        </div>
+        <script>
+            document.getElementById("numvowel").addEventListener("submit", (e) => {
+                e.preventDefault();
+                if (document.getElementById("word").value !== "") {
+                    // const params = new URLSearchParams(new FormData(e.target))
+                    const params = "word=" + document.getElementById("word").value;  // Similar as above.
+
+                    fetch("/numvowels?" + params)
+                        .then(res => res.text())
+                        .then(res => document.getElementById("numvowel_results").innerHTML = res)
+                }
+            });
+        </script>
+    </fieldset>
+    <fieldset>
+        <legend>/greetings</legend>
+        <div>
+            <form id="greetings" method="post">
+                <label for="name">Enter a name: </label>
+                <input id="name" name="name" type="text">
+                <button>Submit</button>
+            </form>
+            <div>Result: <span id="greetings_results"></span></div>
+        </div>
+        <script>
+            document.getElementById("greetings").addEventListener("submit", (e) => {
+                e.preventDefault();
+                if (document.getElementById("name").value !== "") {
+                    const params = new URLSearchParams(new FormData(e.target))
+
+                    fetch("/greetings", {
+                        method: "post",
+                        body: params,
+                    })
+                        .then(res => res.text())
+                        .then(res => document.getElementById("greetings_results").innerHTML = res)
+                }
+            });
+        </script>
+    </fieldset>
+    <fieldset>
+        <legend>/dateinfo</legend>
+        <div>
+            <form id="dateinfo" method="post">
+                <label for="date">Enter a date: </label>
+                <input id="date" name="date" type="date">
+                <button>Submit</button>
+            </form>
+            <div>Result: <span id="dateinfo_results"></span></div>
+        </div>
+        <script>
+            document.getElementById("dateinfo").addEventListener("submit", (e) => {
+                e.preventDefault();
+
+                const date_val = document.getElementById("date").value;
+
+                if (date_val !== "") {
+                    fetch("/dateinfo", {
+                        method: "post",
+                        body: JSON.stringify({ "date": date_val }),
+                    })
+                        .then(res => res.json())
+                        .then(res => {
+                            let htmlStr = "<ul>";
+                            for (const [key, val] of Object.entries(res)) {
+                                htmlStr += `<li>${key}: ${val}</li>`;
+                            }
+                            htmlStr += "</ul>";
+
+                            document.getElementById("dateinfo_results").innerHTML = htmlStr;
+                        })
+                }
+            });
+        </script>
+    </fieldset>
+    <fieldset>
+        <legend>/user/&lt;user_id&gt;</legend>
+        <div>
+            <form id="userform" method="post">
+                <label for="user">Enter a user: </label>
+                <input id="user" name="user" type="text">
+                <label for="snack">Enter a snack: </label>
+                <input id="snack" name="snack" type="text">
+                <button>Submit</button>
+            </form>
+            <div>Result: <span id="user_results"></span></div>
+        </div>
+        <script>
+            document.getElementById("userform").addEventListener("submit", (e) => {
+                e.preventDefault();
+
+                const user_val = document.getElementById("user").value;
+                const snack_val = document.getElementById("snack").value;
+
+                if (user_val !== "" && snack_val !== "") {
+                    fetch(`/user/${user_val}?snack=${snack_val}`)
+                        .then(res => res.json())
+                        .then(res => document.getElementById("user_results").innerHTML = res.message)
+                }
+            });
+        </script>
+    </fieldset>
+    <script>
+        document.querySelector("input").addEventListener("keypress", (e) => {
+            if (e.key === "Enter") {
+                if (e.target.parent) e.target.parent.submit();
+            }
+        })
+    </script>
+</body>
+
+</html>

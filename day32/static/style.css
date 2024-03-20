@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Ravi+Prakash&display=swap');
+
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: "Ravi Prakash", system-ui;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    font-size: 2rem;
+    width: 80%;
+    margin: 1rem auto;
+}
+
+nav img {
+    height: 3.5rem;
+}
+
+nav a {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.right_nav {
+    display: flex;
+    gap: 2rem;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+footer {
+    width: 80%;
+    margin: 1rem auto;
+    text-align: center;
+}

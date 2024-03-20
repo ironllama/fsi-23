@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block headstuff%}
+<title>Character Details -- {{ jetson.name }}</title>
+{% endblock %}
+
+{% block mainstuff %}
+<div style="display: flex; align-items: center;">
+    <img style="flex: 1; max-height: 300px; object-fit: contain;" src="{{ jetson.pic }}">
+    <ul style="flex: 2">
+        {% for k,v in jetson.items() %}
+        <li><span style="color: slategray;">{{ k }}:</span> {{ v }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

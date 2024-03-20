@@ -23,3 +23,45 @@
 # as necessary. Remember to also use the appropriate request methods
 # and data formats to match what is expected from the API. Display results
 # of each API call below the respective forms.
+from flask import Flask, request
+from datetime import date
+
+app = Flask(__name__)
+
+@app.get("/numvowels")
+def numvowels():
+    word = request.args.get('word', '')
+    return str(len([char for char in word if char.lower() in "aeiou"]))
+
+@app.post("/greetings")
+def greetings():
+    name = request.form.get('name', '')
+    return f"Hello {name}, your name backwards is {name[::-1]}!"
+
+@app.route("/dateinfo", methods=['GET', 'POST'])
+def dateinfo():
+    if request.method == 'GET':
+        date_str = request.args.get('date', '')
+    else:
+        date_str = request.form.get('date', '')
+
+    if date_str:
+        date_val = date.fromisoformat(date_str)
+    else:
+        date_val = date.today()
+    
+    return {
+        "year": date_val.year,
+        "month": date_val.strftime("%B"),
+        "day": date_val.day,
+        "weekday": date_val.strftime("%A"),
+        "yearday": date_val.strftime("%j"),
+    }
+
+@app.get("/user/<user_id>")
+def user(user_id):
+    snack = request.args.get('snack', '')
+    if user_id == '123-456-7890':
+        return { "message": f"{user_id} loves to eat {snack}{'s' if not snack.endswith('s') else ''}." }
+    else:
+        return { "message": "User not found." }

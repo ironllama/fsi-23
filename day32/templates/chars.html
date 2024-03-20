@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block headstuff%}
+<title>Character Lookup</title>
+{% endblock %}
+
+{% block mainstuff %}
+<div style="font-size: 1.5rem; display: flex; flex-direction: column; align-items: center;">
+    <div>Enter a character name for more information:</div>
+    <div>
+        <input id="nameInput" type="text">
+        <button id="nameSubmit">Submit</button>
+    </div>
+    <div id="nameResults"></div>
+</div>
+<script>
+    const nameInputElem = document.querySelector("#nameInput");
+    const nameSubmitElem = document.querySelector("#nameSubmit");
+    const nameResultsElem = document.querySelector("#nameResults");
+
+    nameSubmitElem.addEventListener("click", submitName)
+    nameInput.addEventListener("keypress", (evt) => {
+        if (evt.key == 'Enter') submitName();
+    });
+
+    function submitName() {
+        if (nameInputElem.value.length > 0) {
+            fetch("/check_name/" + nameInputElem.value.toLowerCase())
+                .then(res => res.text())
+                .then(res => {
+                    if (res === "True")
+                        window.location.href = ("/details/" + nameInputElem.value.toLowerCase());
+                    else
+                        nameResultsElem.innerHTML = "Invalid name. Please try again."
+                });
+        }
+    }
+</script>
+{% endblock %}
