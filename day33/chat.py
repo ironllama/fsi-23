@@ -6,7 +6,7 @@
 #    Anytime the page is loaded, it should retrieve all the messages from
 #     the backend.
 
-#    Messages are sent to the backend and stored in a file in JSON format.
+#    Messages are sent to the backend and stored in a file in any format.
 #     You must store at least the date/time the message was sent, the name
 #     of the message sender, and the message text for every message.
 

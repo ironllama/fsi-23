@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Requests Test</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            gap: 4rem;
+            font-family: sans-serif;
+            font-size: 14px;
+        }
+
+        form {
+            border: 2px solid cornflowerblue;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            min-width: 50%;
+        }
+
+        label {
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        input {
+            font-size: inherit;
+            padding: 0.5rem 0.75rem;
+            border: 1px solid dimgray;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 0.5rem 0.75rem;
+            min-width: 7rem;
+            background-color: cornflowerblue;
+            color: white;
+            font-weight: bold;
+            border: 1px solid slateblue;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <form method="get" action="/top" class="top">
+        <label for="snacks">(GET /top) Enter snacks:</label>
+        <input name="snack">
+        <button>Send</button>
+    </form>
+    <form method="post" action="/topbottom" class="bottom">
+        <label for="snacks">(POST /topbottom) Enter snacks:</label>
+        <input name="snack">
+        <button>Send</button>
+    </form>
+    <form method="get" action="/topbottom" class="top">
+        <label for="snacks">(GET /topbottom) Enter snacks:</label>
+        <input name="snack">
+        <button>Send</button>
+    </form>
+    <form method="post" action="/topbottom" class="bottom">
+        <label for="snacks">(POST /topbottom) Enter snacks:</label>
+        <input name="snack">
+        <button>Send</button>
+    </form>
+    <form id="topbottomnina" class="top">
+        <label for="snacks">(/topbottomnina) Enter snacks:</label>
+        <input id="topbottomninaInput" name="snack">
+        <button id="topbottomninaButton">Send</button>
+    </form>
+    <div id="tbnResultsGet"></div>
+    <div id="tbnResultsPost"></div>
+    <script>
+        document.getElementById("topbottomninaButton")
+            .addEventListener("click", function (evt) {
+                const newSnack = document.getElementById("topbottomninaInput").value;
+
+                fetch("/topbottomnina/" + newSnack)
+                    .then(res => res.text())
+                    .then(res => {
+                        document.getElementById("tbnResultsGet").innerHTML = res;
+                    });
+
+                fetch("/topbottomnina/" + newSnack, { method: "post" })
+                    .then(res => res.text())
+                    .then(res => {
+                        document.getElementById("tbnResultsPost").innerHTML = res;
+                    });
+
+                evt.preventDefault();
+            })
+    </script>
+</body>
+
+</html>
