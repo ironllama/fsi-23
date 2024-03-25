@@ -1,0 +1,10 @@
+<h3>{{ title }}</h3>
+<ul>
+    {% for phone in phones %}
+    <li>
+        Model: {{ phone.model }} brand: {{ phone.brand }}<br>
+        owned by: {{ phone.owner }}<br>
+        ({{ phone.price }} dollars)
+    </li>
+    {% endfor %}
+</ul>
