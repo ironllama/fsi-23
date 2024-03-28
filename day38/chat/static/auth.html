@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <div class="leftMain">
+        <div class="overlay">
+            <h1>Welcome Back!</h1>
+            <p>Already have an account? Sign in and start to chat with friends</p>
+            <button>Sign In</button>
+        </div>
+        <form method="post" action="login" class="inputForm">
+            <input placeholder="Login" name="username" required>
+            <input placeholder="Password" name="password" id="password" type="password" required>
+            <div>
+                <input type="checkbox" name="remember" id="remember">
+                <label for="remember">Remember me?</label>
+            </div>
+            <a href="#">Forgot your password?</a>
+            <button>Sign In</button>
+        </form>
+    </div>
+    <div class="rightMain">
+        <div class="overlay hidden">
+            <h1>Hello</h1>
+            <p>Not a member of the fun yet? Sign up to chat with your friends</p>
+            <button>Sign Up</button>
+        </div>
+        <form method="post" action="signup" class="inputForm">
+            <h1>Create Account</h1>
+            <input placeholder="Login" name="username" required>
+            <input placeholder="Email" name="email" required>
+            <input placeholder="Password" name="password" id="password" type="password" required>
+            <input placeholder="Password confirm" name="confirm" id="confirm" type="password" required>
+            <button>Sign Up</button>
+        </form>
+    </div>
+    <script src="/static/js/auth.js"></script>
+</body>
+
+</html>
