@@ -1,0 +1,43 @@
+.game {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.guesses {
+  height: 5rem;
+  font-size: 2rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  font-size: 1rem;
+  margin: 0 1rem;
+}
+
+.bottom {
+  display: flex;
+  text-align: center;
+  gap: 2rem;
+  font-size: 3rem;
+  color: firebrick;
+}
+
+.wrong {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.gameState {
+  display: flex;
+  gap: 2rem;
+  font-size: 2rem;
+  color: gold;
+  padding: 2rem;
+}

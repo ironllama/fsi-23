@@ -1,0 +1,10 @@
+.box {
+    width: 5rem;
+    height: 5rem;
+    border: 1px solid grey;
+    border-radius: 10px;
+    font-size: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

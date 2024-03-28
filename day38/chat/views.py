@@ -1,7 +1,6 @@
 from flask import request, session, redirect, url_for, render_template
 from sqlalchemy.sql import text
 from sqlalchemy.exc import SQLAlchemyError
-from datetime import datetime
 
 from chat import app, sql
 
